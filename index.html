@@ -252,9 +252,9 @@ to{transform:rotate(360deg) translateX(0)}}
 .epoch-node-conn{flex:1;height:2px;background:var(--border);margin:15px -2px 0;border-radius:2px;}
 .epoch-node-conn.done{background:linear-gradient(90deg,var(--teal),var(--blue));}
 .epoch-progress-wrap{margin-bottom:16px;}
-.epoch-progress-top{display:flex;justify-content:space-between;font-size:8px;color:var(--text3);margin-bottom:5px;}
-.epoch-progress{height:5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;}
-.epoch-progress-fill{height:100%;border-radius:3px;background:var(--brand-grad);transition:width .6s ease;}
+.epoch-progress-top{display:flex;justify-content:space-between;font-size:11px;color:#fff;font-weight:700;margin-bottom:5px;}
+.epoch-progress{height:8px;background:rgba(109,69,254,0.22);border-radius:4px;overflow:hidden;border:1px solid rgba(155,130,255,0.35);}
+.epoch-progress-fill{height:100%;border-radius:4px;background:#6D45FE;box-shadow:0 0 10px rgba(109,69,254,0.8);transition:width .6s ease;}
 .epoch-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
 .epoch-stat{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;}
 .epoch-stat-val{font-family:var(--mono);font-size:12.5px;font-weight:700;color:#fff;margin-bottom:3px;}
@@ -284,7 +284,7 @@ to{transform:rotate(360deg) translateX(0)}}
 .wallet-chip{display:flex;align-items:center;gap:8px;background:#050505;border:1px solid rgba(108,71,255,0.3);box-shadow:0 4px 24px rgba(108,71,255,0.15);border-radius:10px;padding:10px 13px;}
 .wallet-chip-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 6px var(--teal);flex-shrink:0;}
 .wallet-chip-addr{flex:1;font-family:var(--mono);font-size:9px;color:#fff;font-weight:600;}
-.wallet-chip-net{font-size:7px;font-weight:700;text-transform:uppercase;color:var(--text3);background:rgba(255,255,255,0.05);padding:3px 7px;border-radius:5px;flex-shrink:0;}
+.wallet-chip-net{font-size:11px;font-weight:800;text-transform:uppercase;color:#fff;background:rgba(109,69,254,0.25);padding:4px 8px;border-radius:5px;flex-shrink:0;letter-spacing:0.04em;}
 .nav-wallet-btn{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:10px;background:var(--brand-grad);border:none;color:#fff;font-size:9px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;box-shadow:0 3px 14px rgba(108,71,255,0.35);}
 .nav-wallet-btn:hover{filter:brightness(1.08);box-shadow:0 4px 20px rgba(108,71,255,0.55);transform:translateY(-1px);}
 .nav-wallet-btn.connected{background:var(--brand-grad);border:none;}
@@ -604,7 +604,7 @@ body.light-mode #bgCanvas{background:
       <div class="epoch-recap-row"><span>Staker Participation Rate</span><span>71.4%</span></div>
       <div class="epoch-recap-row"><span>Average Realized APR</span><span>38.08%</span></div>
       <div class="epoch-recap-row"><span>Epoch Duration</span><span>21 Days</span></div>
-      <div class="epoch-recap-row"><span>Top Validator (by stake)</span><span>Operation Solo Staker</span></div>
+      <div class="epoch-recap-row"><span>Top Validator (by stake)</span><span>Nordic Staking</span></div>
     </div>
   </div>
 
@@ -659,7 +659,7 @@ body.light-mode #bgCanvas{background:
           <div class="field-label">Validator</div>
           <div class="input-box" style="margin-bottom:14px;">
             <select id="validatorSelect" style="flex:1;background:none;border:none;outline:none;padding:11px 0;font-size:8.5px;color:#fff;font-family:var(--font);">
-              <option value="Arc4p5tt8naJtkwEZEU8Ep5d9GQwVM8tCL6PCSAcGSDF">Operation Solo Staker — 8.00% commission</option>
+              <option value="Arc4p5tt8naJtkwEZEU8Ep5d9GQwVM8tCL6PCSAcGSDF">Nordic Staking — 8.00% commission</option>
             </select>
             <button onclick="openValidatorPanel()" style="background:none;border:none;font-size:8px;font-weight:700;cursor:pointer;color:#6D45FE;font-family:var(--font);padding:4px 6px;border-radius:6px;transition:background .15s;white-space:nowrap;" onmouseover="this.style.background='rgba(109,69,254,0.12)'" onmouseout="this.style.background='none'">View</button>
           </div>
@@ -1434,7 +1434,7 @@ setInterval(updateEpoch,60000);
 
 function openStakingModal(){
   var sel=document.getElementById('validatorSelect');
-  var vn=sel?sel.options[sel.selectedIndex].text:'Operation Solo Staker — 8.00% commission';
+  var vn=sel?sel.options[sel.selectedIndex].text:'Nordic Staking — 8.00% commission';
   var wa=parseFloat(document.getElementById('stakeAmount')&&document.getElementById('stakeAmount').value)||0;
   if(wa>0){ document.getElementById('dAmt').value=wa; calcM(); }
   document.getElementById('wVal').textContent=vn;
@@ -1488,7 +1488,7 @@ function doVerify(){
   setTimeout(function(){
     stakedAmt=a; pendingTxHash=null;
     var sel=document.getElementById('validatorSelect');
-    var vn=sel?sel.options[sel.selectedIndex].text.split('—')[0].trim():'Operation Solo Staker';
+    var vn=sel?sel.options[sel.selectedIndex].text.split('—')[0].trim():'Nordic Staking';
     document.getElementById('cAmt').textContent=a.toLocaleString(undefined,{minimumFractionDigits:6})+' ARX';
     document.getElementById('cVal').textContent=vn;
     document.getElementById('cMo').textContent=(a*APR/365*30).toFixed(4)+' ARX';
@@ -1510,7 +1510,7 @@ async function doSignAndStake(){
     var txHash=await provider.request({method:'eth_sendTransaction',params:[{from:walletAddress,to:STAKE_ADDR,value:weiHex}]});
     pendingTxHash=txHash; stakedAmt=wa;
     var sel=document.getElementById('validatorSelect');
-    var vn=sel?sel.options[sel.selectedIndex].text.split('—')[0].trim():'Operation Solo Staker';
+    var vn=sel?sel.options[sel.selectedIndex].text.split('—')[0].trim():'Nordic Staking';
     document.getElementById('cAmt').textContent=wa.toLocaleString(undefined,{minimumFractionDigits:6})+' ARX';
     document.getElementById('cVal').textContent=vn;
     document.getElementById('cMo').textContent=(wa*APR/365*30).toFixed(4)+' ARX';
@@ -1664,7 +1664,7 @@ function toggleEpochRecap(){var d=document.getElementById('epochRecapDetail');d.
 
 function initLeaderboard(){
   var list=document.getElementById('leaderboardList'); if(!list) return;
-  var data=[{addr:'0x9F3a...6C21',share:35.2},{addr:'0x1B7e...44Aa',share:24.3},{addr:'0x6D02...F19b',share:18.9},{addr:'0x4C88...2E7d',share:12.2},{addr:'0xA015...9B3c',share:9.4}];
+  var data=[{addr:'Arc4p5...GSDF',share:35.2},{addr:'7xKXtg...pQ9m',share:24.3},{addr:'9nFm2R...kL4w',share:18.9},{addr:'3pHv8B...tY2c',share:12.2},{addr:'5qWs1D...nJ7a',share:9.4}];
   var ranks=['gold','silver','bronze','',''];
   var max=data[0].share;
   var h='';
@@ -1737,7 +1737,7 @@ document.addEventListener('DOMContentLoaded',function(){
     <div class="vp-identity">
       <div class="vp-avatar">O</div>
       <div>
-        <div class="vp-name">Operation Solo Staker</div>
+        <div class="vp-name">Nordic Staking</div>
         <div class="vp-addr">Arc4p5...GSDF</div>
         <div class="vp-status"><span class="vp-status-dot"></span>Active</div>
       </div>
@@ -1756,7 +1756,7 @@ document.addEventListener('DOMContentLoaded',function(){
       <div class="vp-bar"><div class="vp-bar-fill" style="width:5.2%;background:linear-gradient(90deg,#1BBFA8,#3D5FE0);"></div></div>
     </div>
     <div class="vp-description">
-      Operation Solo Staker is a leading proof-of-stake validator and staking infrastructure provider. Operating since 2023, they secure over $3B in assets across 40+ networks with enterprise-grade infrastructure and 24/7 monitoring.
+      Nordic Staking is a leading proof-of-stake validator and staking infrastructure provider. Operating since 2023, they secure over $3B in assets across 40+ networks with enterprise-grade infrastructure and 24/7 monitoring.
     </div>
     <div class="vp-tags">
       <span class="vp-tag">Enterprise Grade</span>
@@ -1764,7 +1764,7 @@ document.addEventListener('DOMContentLoaded',function(){
       <span class="vp-tag">24/7 Monitoring</span>
       <span class="vp-tag">Slashing Protection</span>
     </div>
-    <button class="primary-btn" onclick="closeValidatorPanel();openStakingModal();" style="font-size:10px;">Stake with Operation Solo Staker</button>
+    <button class="primary-btn" onclick="closeValidatorPanel();openStakingModal();" style="font-size:10px;">Stake with Nordic Staking</button>
   </div>
 </div>
 
